@@ -1,0 +1,27 @@
+<html>
+	<div id = "id01">
+		<button onclick="reqIt()"></button>
+		
+	</div>
+	
+	
+	<script>
+	function reqIt() {
+		var xmlhttp = new XMLHttpRequest();
+		var url = "162.243.36.18:8000";
+		
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var data = JSON.parse(xmlhttp.responseText);
+					document.getElementById("id01") = data;
+			}
+		};
+		
+		xmlhttp.open("GET", url, true);
+		
+		xmlhttp.send();
+	}
+	</script>
+	
+	
+</html>
