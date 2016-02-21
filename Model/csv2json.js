@@ -68,17 +68,6 @@ var server = http.createServer(function(request, response) {
 		writer.end();	
 
 }
-		console.log("BS" + advisees);
-		var data = JSON.stringify(advisees);
-		fs.writeFile("test.json", "DIE BITCH", function(err) {
-	 		 
-		if (err) {
-				return console.error(err);	
-			}
-
-		
-			console.log("Some data " + data.toString());
-			});
 		
 	
 
