@@ -6,9 +6,10 @@
 	
 	
 	<script>
+	
 	function reqIt() {
 		var xmlhttp = new XMLHttpRequest();
-		var url = "162.243.36.18:8000";
+		var url = "http://162.243.36.18:8000/students.json";
 		
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -21,6 +22,9 @@
 		
 		xmlhttp.send();
 	}
+	
+	
+
 	</script>
 	
 	

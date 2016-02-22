@@ -1,13 +1,17 @@
 var fs = require('fs');
-console.log("???");
+
+var express = require('express');
+var app = express();
 var advisees = new Array();
 var http = require('http');
 
-var server = http.createServer(function(request, response) {
-		response.writeHead(200, {"Conent-Type": "text/plain"});
-		
+var cors = require('cors');
 
-		fs.readFile('grades.csv', function(err,data) {
+ 
+app.use(cors());
+getJSON();
+function getJSON() {
+	fs.readFile('grades.csv', function(err,data) {
 			if (err) {
 				return console.error(err);
 			}
@@ -50,14 +54,35 @@ var server = http.createServer(function(request, response) {
                                           	{"grade":currLine[19], "comment": ""}
 						  ]
 				});
+				
+				advisees.push("\n"); 
 
 			}
-		writeJSON(JSON.stringify(advisees)); //once loop is finished, pass advisees to file write func
-		response.end(JSON.stringify(advisees));
-		});
-		});//end of server func
+			
+			return JSON.stringify(advisees);
+});
 
-	server.listen(8000);
+}
+
+
+app.get('/students.json',cors(), function (req, res) {
+  res.sendFile("/things/students.json", function (err) {
+    if (err) {
+      console.log(err);
+      res.status(err.status).end();
+    }
+    else {
+      console.log('Sent:', fileName);
+    }
+  });
+});
+
+app.listen(8000, function(){
+  console.log('CORS-enabled web server listening on port 8000');
+});
+
+
+	
 	function writeJSON(content) {
 		var writer = fs.createWriteStream('students.json');
 		writer.write("\"students\": \n");
